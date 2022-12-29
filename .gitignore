@@ -1,6 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,venv,virtualenv,windows,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,venv,virtualenv,windows,linux,macos
 
+### Certs ###
+*.key
+*.crt
+*.pem
+*.cer
+
 ### Django ###
 *.log
 *.pot
