@@ -30,12 +30,14 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'myproject.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'myproject.com', 'ocs-inventory.pp.ua', '0.0.0.0']
+CSRF_TRUSTED_ORIGINS = ['https://myproject.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "upload",
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,9 +82,13 @@ WSGI_APPLICATION = 'MyProject.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": os.environ.get("DATABASE_ENGINE"),
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("DATABASE_USERNAME"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD",),
+        "HOST": os.environ.get("DATABASE_HOST",),
+        "PORT": os.environ.get("DATABASE_PORT",),
     }
 }
 
@@ -117,11 +123,22 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Redis Settings
+REDIS_URL = os.environ.get('REDIS_URL', default=None)
+
+if REDIS_URL:
+    CACHES = {
+        "default": os.environ.get('REDIS_URL')
+    }
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

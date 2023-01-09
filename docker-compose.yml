@@ -1,0 +1,67 @@
+
+services:
+  web:
+    restart: always
+    container_name: django
+    build: 
+      context: ./MyProject/
+      dockerfile: Dockerfile
+    expose:
+      - "8000"
+    # connects you to your databases  
+    links:
+      - postgres:postgres
+      - redis:redis
+    # where we will store the data.
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    env_file: 
+      - ./MyProject/environment/.env
+    command: /usr/local/bin/gunicorn MyProject.wsgi:application -w 3 -b :8000
+    depends_on:
+      - postgres
+  
+  nginx-proxy:
+    restart: always
+    container_name: nginx-proxy
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile 
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    volumes_from:
+      - web
+    links:
+      - web:web
+    depends_on:
+      - web    
+
+  postgres:
+    restart: always
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    env_file:
+      - ./MyProject/environment/dbcredentials.env
+  
+  redis:
+    restart: always
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:
+  static_volume:
+  media_volume:
