@@ -1,0 +1,17 @@
+name: Test_Django
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      - testing-and-security
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install -r requirements.txt
+      - run: pytest . # run pytest test
