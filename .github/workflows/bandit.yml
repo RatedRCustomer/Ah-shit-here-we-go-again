@@ -16,11 +16,10 @@ jobs:
     name: Python ${{ matrix.python-version }} ${{ matrix.os }} 
 
     steps:
-    - uses: actions/checkout@v2
-    
     - name: Permission 
     - run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh
-    
+    - uses: actions/checkout@v2
+
     - name: Security check - Bandit
       uses: ./MyProject/
       with:
