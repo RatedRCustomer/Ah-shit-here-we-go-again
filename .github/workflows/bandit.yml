@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Security check - Bandit
-      uses: ./home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/
+      uses: ./MyProject/
       with:
         python_version: ${{ matrix.python-version }}
         project_path: .
