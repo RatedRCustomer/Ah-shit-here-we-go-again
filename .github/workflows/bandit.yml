@@ -35,4 +35,5 @@ jobs:
       # if: failure()
       with:
         name: Security report
-        path: output/security_report.txt
+        run: echo ./output/security_report.txt
+        
