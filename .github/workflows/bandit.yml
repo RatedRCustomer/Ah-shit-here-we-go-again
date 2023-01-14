@@ -32,9 +32,8 @@ jobs:
 
     - name: Security check report artifacts
       uses: actions/upload-artifact@v1
-      # if: failure()
+      if: failure()
       with:
         name: Security report
-        run: echo ./output/security_report.txt
         path: output/security_report.txt
         
