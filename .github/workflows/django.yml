@@ -27,4 +27,4 @@ jobs:
         pip install -r /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/manage.py test
