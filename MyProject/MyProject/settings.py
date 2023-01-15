@@ -13,7 +13,7 @@ import os
 import sys
 import environ
 
-environ.Env.read_env(env_file="./environment/.env")
+environ.Env.read_env(env_file="./environment/django.env")
 
 
 from pathlib import Path
