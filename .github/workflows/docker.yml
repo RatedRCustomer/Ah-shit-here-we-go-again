@@ -1,0 +1,34 @@
+name: Docker Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: ./docker-compose.yml
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build docker images
+      run: docker-compose build
+
+    - name: Run tests
+      run: docker-compose run test
+    
+  test_other:
+    name: Docker Bench for Security
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: ./docker-compose.yml
+      
+    steps:
+    - name: Install and Run Test
+      run: sudo apt-get install git -y && git clone https://github.com/docker/docker-bench-security.git && cd docker-bench-security && sudo sh docker-bench-security.sh

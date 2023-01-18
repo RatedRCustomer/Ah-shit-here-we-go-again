@@ -5,7 +5,7 @@ services:
     container_name: django
     build: 
       context: ./MyProject/
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     expose:
       - "8000"
     # connects you to your databases  
@@ -17,7 +17,7 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     env_file: 
-      - ./MyProject/environment/.env
+      - ./MyProject/environment/django.env
     command: /usr/local/bin/gunicorn MyProject.wsgi:application -w 3 -b :8000
     depends_on:
       - postgres
@@ -27,7 +27,7 @@ services:
     container_name: nginx-proxy
     build: 
       context: ./nginx/
-      dockerfile: Dockerfile 
+      dockerfile: dockerfile 
     ports:
       - 80:80
       - 443:443
