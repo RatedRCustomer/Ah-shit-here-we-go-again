@@ -12,13 +12,14 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        python-version: [ '3.11.1' ]
+        python-version: [ '3.10.8' ]
     name: Python ${{ matrix.python-version }} ${{ matrix.os }} 
 
     steps:
     - uses: actions/checkout@v2
     - name: Permission 
       run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh
+      run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.sh
 
     - name: Security check - Bandit
       uses: ./MyProject/
