@@ -1,67 +1,22 @@
+version: '3.8'
 
 services:
   web:
-    restart: always
-    container_name: django
-    build: 
-      context: ./MyProject/
-      dockerfile: dockerfile
-    expose:
-      - "8000"
-    # connects you to your databases  
-    links:
-      - postgres:postgres
-      - redis:redis
-    # where we will store the data.
+    build: ./MyProject
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - static_volume:/home/app/web/staticfiles
-      - media_volume:/home/app/web/mediafiles
-    env_file: 
-      - ./MyProject/environment/django.env
-    command: /usr/local/bin/gunicorn MyProject.wsgi:application -w 3 -b :8000
-    depends_on:
-      - postgres
-  
-  nginx-proxy:
-    restart: always
-    container_name: nginx-proxy
-    build: 
-      context: ./nginx/
-      dockerfile: dockerfile 
+      - ./MyProject/:/usr/src/app/
     ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - static_volume:/home/app/web/staticfiles
-      - media_volume:/home/app/web/mediafiles
-    volumes_from:
-      - web
-    links:
-      - web:web
-    depends_on:
-      - web    
-
-  postgres:
-    restart: always
-    container_name: postgres
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - 8000:8000
     env_file:
-      - ./MyProject/environment/dbcredentials.env
+      - ./environment/.env.dev
   
-  redis:
-    restart: always
-    image: redis:latest
-    ports:
-      - "6379:6379"
+  db:
+    image: postgres:latest
     volumes:
-      - redisdata:/data
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./environment/.env.dev
 
 volumes:
-  pgdata:
-  redisdata:
-  static_volume:
-  media_volume:
+  postgres_data:
