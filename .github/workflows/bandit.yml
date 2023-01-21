@@ -18,8 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Permission 
-      run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh
-      run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.sh
+      run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh && chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.sh
 
     - name: Security check - Bandit
       uses: ./MyProject/
