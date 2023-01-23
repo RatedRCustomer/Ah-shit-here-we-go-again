@@ -1,4 +1,3 @@
-# Set update schedule for GitHub Actions
 
 version: 2
 updates:
@@ -10,7 +9,7 @@ updates:
       interval: "weekly"
     labels:
       - "update"
-  
+      
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -21,4 +20,3 @@ updates:
     directory: "/"
     schedule:
       # Check for updates to GitHub Actions every week
-      interval: "weekly"
