@@ -30,6 +30,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /usr/src/app/
+            chmod +x /usr/src/app/MyProject/entrypoint.prod.sh
             tree .
             docker-compose down -v
             docker-compose -f docker-compose.prod.yml up -d --build
