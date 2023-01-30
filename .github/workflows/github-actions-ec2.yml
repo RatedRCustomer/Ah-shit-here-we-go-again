@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/usr/src/app/
+            cd /usr/src/app/
             tree .
             docker-compose down -v
             docker-compose -f docker-compose.prod.yml up -d --build
