@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-        
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.EC2_SSH_KEY }} 
 
       - name: Deploy to Prod
         uses: easingthemes/ssh-deploy@main
