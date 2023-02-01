@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and Black Tests
 
 on:
   push:
@@ -31,3 +31,10 @@ jobs:
           black_auto_fix: false
           flake8: true
           flake8_auto_fix: false
+
+      - name: Black report artifacts
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Black report
+          path: output/lint_black_report.txt
