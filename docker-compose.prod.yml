@@ -4,6 +4,7 @@ services:
   web:
     container_name: django-web
     restart: always
+    image: django-web:latest
     build:
       context: ./MyProject/
       dockerfile: Dockerfile.prod
@@ -24,7 +25,7 @@ services:
   db:
     restart: always
     container_name: postgres
-    image: postgres:latest
+    image: postgres:15.1
     ports:
       - "5432:5432"
     volumes:
@@ -35,6 +36,7 @@ services:
   nginx:
     restart: always
     container_name: nginx-proxy
+    image: nginx-proxy:latest
     build: 
       context: ./nginx/
       dockerfile: dockerfile
