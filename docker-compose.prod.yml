@@ -33,6 +33,17 @@ services:
     env_file:
       - ./environment/.env.prod.db
 
+
+  pgbackups3:
+    container_name: pgbackups3
+    image: schickling/postgres-backup-s3
+    links:
+    - db
+    environment:
+      SCHEDULE: '@daily'
+    env_file:
+      - ./environment/.env.db.s3
+
   nginx:
     restart: always
     container_name: nginx-proxy
