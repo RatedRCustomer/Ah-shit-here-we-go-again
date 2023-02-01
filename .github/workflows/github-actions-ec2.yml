@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-
+        
       - name: Deploy to Prod
         uses: easingthemes/ssh-deploy@main
         env:
@@ -21,11 +21,18 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-        script: |
-            cd ~/usr/src/app/Ah-shit-here-we-go-again/
+       
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /usr/src/app/
+            chmod +x /usr/src/app/MyProject/entrypoint.prod.sh
             tree .
             docker-compose down -v
             docker-compose -f docker-compose.prod.yml up -d --build
             docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
             docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
-      
