@@ -16,7 +16,7 @@ jobs:
     name: Python ${{ matrix.python-version }} ${{ matrix.os }} 
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Permission 
       run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh && chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.sh
 
