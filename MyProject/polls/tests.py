@@ -8,6 +8,7 @@ from .models import Question
 
 polls_index = "polls:index"
 
+
 def create_question(question_text, days):
     """
     Create a question with the given `question_text` and published the
