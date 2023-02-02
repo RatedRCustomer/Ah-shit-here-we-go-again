@@ -25,13 +25,24 @@ services:
   db:
     restart: always
     container_name: postgres
-    image: postgres:15.1
+    image: postgres:14.3-bullseye
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./environment/.env.prod.db
+
+
+  pgbackups3:
+    container_name: pgbackups3
+    image: schickling/postgres-backup-s3
+    links:
+    - db
+    environment:
+      SCHEDULE: '@daily'
+    env_file:
+      - ./environment/.env.db.s3
 
   nginx:
     restart: always

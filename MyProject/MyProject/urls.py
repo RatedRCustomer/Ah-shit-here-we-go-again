@@ -22,8 +22,8 @@ from upload.views import image_upload
 
 urlpatterns = [
     path("", image_upload, name="upload"),
-    path('polls/', include('polls.urls')),
-    path('admin/', admin.site.urls),
+    path("polls/", include("polls.urls")),
+    path("admin/", admin.site.urls),
 ]
 
 if bool(settings.DEBUG):
