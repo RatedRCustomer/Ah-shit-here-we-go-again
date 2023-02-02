@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from .models import Question
 
+polls_index = "polls:index"
 
 def create_question(question_text, days):
     """
@@ -22,7 +23,7 @@ class QuestionIndexViewTests(TestCase):
         """
         If no questions exist, an appropriate message is displayed.
         """
-        response = self.client.get(reverse("polls:index"))
+        response = self.client.get(reverse(polls_index))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are available.")
         self.assertQuerysetEqual(response.context["latest_question_list"], [])
@@ -54,7 +55,7 @@ class QuestionIndexViewTests(TestCase):
         """
         question = create_question(question_text="Past question.", days=-30)
         create_question(question_text="Future question.", days=30)
-        response = self.client.get(reverse("polls:index"))
+        response = self.client.get(reverse(polls_index))
         self.assertQuerysetEqual(
             response.context["latest_question_list"],
             [question],
@@ -66,7 +67,7 @@ class QuestionIndexViewTests(TestCase):
         """
         question1 = create_question(question_text="Past question 1.", days=-30)
         question2 = create_question(question_text="Past question 2.", days=-5)
-        response = self.client.get(reverse("polls:index"))
+        response = self.client.get(reverse(polls_index))
         self.assertQuerysetEqual(
             response.context["latest_question_list"],
             [question2, question1],

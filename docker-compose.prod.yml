@@ -36,7 +36,7 @@ services:
 
   pgbackups3:
     container_name: pgbackups3
-    image: schickling/postgres-backup-s3
+    image: schickling/postgres-backup-s3:master
     links:
     - db
     environment:
