@@ -33,7 +33,7 @@ jobs:
           flake8_auto_fix: false
 
       - name: Black report artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: Black report
