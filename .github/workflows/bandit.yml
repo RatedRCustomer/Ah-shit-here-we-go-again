@@ -31,7 +31,7 @@ jobs:
       run: tree .
 
     - name: Security check report artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       if: failure()
       with:
         name: Security report
