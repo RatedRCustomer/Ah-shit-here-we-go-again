@@ -21,7 +21,7 @@ jobs:
       run: chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.prod.sh && chmod +x /home/runner/work/Ah-shit-here-we-go-again/Ah-shit-here-we-go-again/MyProject/entrypoint.sh
 
     - name: Security check - Bandit
-      uses: tj-actions/bandit@v5.1
+      uses: tj-actions/bandit@v5.3
       with:
         python_version: ${{ matrix.python-version }}
         project_path: .
