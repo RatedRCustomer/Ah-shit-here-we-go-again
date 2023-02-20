@@ -18,5 +18,5 @@ PyYAML==6.0
 redis==4.5.1
 smmap==5.0.0
 sqlparse==0.4.3
-stevedore==4.1.1
+stevedore==5.0.0
 tzdata==2022.7
