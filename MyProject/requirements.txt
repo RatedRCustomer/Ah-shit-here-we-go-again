@@ -15,7 +15,7 @@ psycopg2==2.9.5
 psycopg2-binary==2.9.5
 python-environ==0.4.54
 PyYAML==6.0
-redis==4.5.1
+redis==4.5.3
 smmap==5.0.0
 sqlparse==0.4.3
 stevedore==5.0.0
